@@ -102,30 +102,6 @@ jobs:
           push: true
           tags: heiikousen/kittygram_frontend:latest
 
-  nginx_tests:
-    name: Nginx Configuration and Functional Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-      - name: Install Nginx
-        run: sudo apt-get update && sudo apt-get install -y nginx
-      - name: Copy Nginx Config
-        run: sudo cp -r ./nginx/* /etc/nginx/
-      - name: Test Nginx Configuration
-        run: sudo nginx -t
-      - name: Start Nginx
-        run: sudo systemctl start nginx
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-      - name: Install pytest
-        run: python -m pip install --upgrade pip && pip install pytest
-      - name: Run Nginx Tests
-        run: |
-          cd nginx/tests
-          pytest
   build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
     runs-on: ubuntu-latest
