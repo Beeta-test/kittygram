@@ -1,6 +1,7 @@
 volumes:
   pg_data:
   static:
+  media:
 
 services:
   db:
@@ -17,6 +18,7 @@ services:
       - db
     volumes:
       - static:/backend_static
+      - media:/media/
 
   frontend:
     env_file: .env
@@ -34,3 +36,4 @@ services:
       - 8001:80
     volumes:
       - static:/staticfiles/
+      - media:/media/
